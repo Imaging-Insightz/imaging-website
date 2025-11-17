@@ -25,7 +25,7 @@ const Navigation = () => {
             <img
               src={Logo}
               alt="Imaging Insight AI Logo"
-              className="w-8 h-8 object-contain rounded-md"
+              className="w-20 h-20 object-contain rounded-md"
             />
             <span className="font-heading font-bold text-xl">Imaging Insight AI</span>
           </Link>

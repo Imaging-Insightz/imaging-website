@@ -113,48 +113,48 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* Open Positions */}
-        <section className="px-4 sm:px-6 lg:px-8 py-16">
-          <div className="container mx-auto">
-            <h2 className="font-heading text-3xl font-bold mb-8 text-center">Open Positions</h2>
-            <div className="max-w-4xl mx-auto space-y-6">
-              {openPositions.map((position, index) => (
-                <Card key={index} className="gradient-card border-none shadow-lg hover:shadow-xl transition-smooth">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1">
-                        <CardTitle className="font-heading text-xl">{position.title}</CardTitle>
-                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Briefcase className="h-4 w-4" />
-                            {position.department}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
-                            {position.location}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {position.type}
-                          </span>
+          {/* Open Positions
+          <section className="px-4 sm:px-6 lg:px-8 py-16">
+            <div className="container mx-auto">
+              <h2 className="font-heading text-3xl font-bold mb-8 text-center">Open Positions</h2>
+              <div className="max-w-4xl mx-auto space-y-6">
+                {openPositions.map((position, index) => (
+                  <Card key={index} className="gradient-card border-none shadow-lg hover:shadow-xl transition-smooth">
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <CardTitle className="font-heading text-xl">{position.title}</CardTitle>
+                          <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                              <Briefcase className="h-4 w-4" />
+                              {position.department}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <MapPin className="h-4 w-4" />
+                              {position.location}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {position.type}
+                            </span>
+                          </div>
                         </div>
+                        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium whitespace-nowrap">
+                          Open
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium whitespace-nowrap">
-                        Open
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{position.description}</p>
-                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground transition-smooth">
-                      Apply Now
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-muted-foreground">{position.description}</p>
+                      <Button className="bg-primary hover:bg-primary/90 text-primary-foreground transition-smooth">
+                        Apply Now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section> */}
 
         {/* CTA Section */}
         <section className="px-4 sm:px-6 lg:px-8 py-16 bg-muted/30">

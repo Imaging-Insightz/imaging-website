@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { CheckCircle, Calendar, Video, Building } from "lucide-react";
+import emailjs from "emailjs-com";
 
 const RequestDemo = () => {
   const [formData, setFormData] = useState({
@@ -22,25 +23,52 @@ const RequestDemo = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Demo request submitted! Our team will contact you shortly.");
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      organization: "",
-      role: "",
-      product: "",
-      message: "",
-    });
+
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      organization: formData.organization,
+      role: formData.role,
+      product: formData.product,
+      message: formData.message || "No message provided",
+      submittedAt: new Date().toLocaleString(),
+    };
+
+    emailjs
+      .send(
+        "service_gs91hue", // 🔥 REPLACE
+        "template_0ws6qke", // 🔥 REPLACE
+        payload,
+        "exCqklCuzPp6sZVz8" // 🔥 REPLACE
+      )
+      .then(() => {
+        toast.success("Demo request submitted! Our team will contact you shortly.");
+
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          organization: "",
+          role: "",
+          product: "",
+          message: "",
+        });
+      })
+      .catch((error) => {
+        toast.error("Failed to submit request. Try again!");
+        console.error("EmailJS Error:", error);
+      });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (e) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -49,15 +77,14 @@ const RequestDemo = () => {
     "Live demonstration of AI analysis capabilities",
     "Discussion of your specific clinical needs",
     "Integration and implementation guidance",
-    "Q&A session with our technical team"
+    "Q&A session with our technical team",
   ];
 
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <main className="pt-24 pb-16">
-        {/* Hero Section */}
         <section className="px-4 sm:px-6 lg:px-8 mb-16">
           <div className="container mx-auto text-center max-w-3xl">
             <h1 className="font-heading text-4xl sm:text-5xl font-bold mb-6 animate-fade-in">
@@ -77,27 +104,27 @@ const RequestDemo = () => {
                 <Card className="gradient-card border-none shadow-xl">
                   <CardContent className="p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
+
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="firstName">First Name *</Label>
                           <Input
                             id="firstName"
                             name="firstName"
+                            required
                             value={formData.firstName}
                             onChange={handleChange}
-                            required
-                            className="bg-background"
                           />
                         </div>
+
                         <div className="space-y-2">
                           <Label htmlFor="lastName">Last Name *</Label>
                           <Input
                             id="lastName"
                             name="lastName"
+                            required
                             value={formData.lastName}
                             onChange={handleChange}
-                            required
-                            className="bg-background"
                           />
                         </div>
                       </div>
@@ -108,23 +135,21 @@ const RequestDemo = () => {
                           id="email"
                           name="email"
                           type="email"
+                          required
                           value={formData.email}
                           onChange={handleChange}
-                          required
-                          className="bg-background"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Label htmlFor="phone">Phone *</Label>
                         <Input
                           id="phone"
                           name="phone"
                           type="tel"
+                          required
                           value={formData.phone}
                           onChange={handleChange}
-                          required
-                          className="bg-background"
                         />
                       </div>
 
@@ -133,97 +158,92 @@ const RequestDemo = () => {
                         <Input
                           id="organization"
                           name="organization"
+                          required
                           value={formData.organization}
                           onChange={handleChange}
-                          required
-                          className="bg-background"
-                          placeholder="Hospital, Research Institution, etc."
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="role">Role *</Label>
-                        <Select
-                          value={formData.role}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, role: value }))}
-                        >
-                          <SelectTrigger className="bg-background">
+                        <Label>Role *</Label>
+                        <Select value={formData.role} onValueChange={(value) =>
+                          setFormData((prev) => ({ ...prev, role: value }))
+                        }>
+                          <SelectTrigger>
                             <SelectValue placeholder="Select your role" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="physician">Physician/Doctor</SelectItem>
-                            <SelectItem value="radiologist">Radiologist</SelectItem>
-                            <SelectItem value="surgeon">Transplant Surgeon</SelectItem>
-                            <SelectItem value="researcher">Researcher</SelectItem>
-                            <SelectItem value="administrator">Healthcare Administrator</SelectItem>
-                            <SelectItem value="it">IT/Technology</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
+                            <SelectItem value="Physician">Physician</SelectItem>
+                            <SelectItem value="Radiologist">Radiologist</SelectItem>
+                            <SelectItem value="Transplant Surgeon">Transplant Surgeon</SelectItem>
+                            <SelectItem value="Researcher">Researcher</SelectItem>
+                            <SelectItem value="Administrator">Administrator</SelectItem>
+                            <SelectItem value="IT">IT</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="product">Product of Interest *</Label>
-                        <Select
-                          value={formData.product}
-                          onValueChange={(value) => setFormData(prev => ({ ...prev, product: value }))}
-                        >
-                          <SelectTrigger className="bg-background">
+                        <Label>Product *</Label>
+                        <Select value={formData.product} onValueChange={(value) =>
+                          setFormData((prev) => ({ ...prev, product: value }))
+                        }>
+                          <SelectTrigger>
                             <SelectValue placeholder="Select a product" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="liver">Liver Insightz</SelectItem>
-                            <SelectItem value="kidney">Kidney Insightz (Renel)</SelectItem>
-                            <SelectItem value="radiogenomics">Radio-Genomes</SelectItem>
-                            <SelectItem value="all">All Products</SelectItem>
+                            <SelectItem value="Liver Insightz">Liver Insightz</SelectItem>
+                            <SelectItem value="Kidney Insightz">Kidney Insightz</SelectItem>
+                            <SelectItem value="Radio-Genomes">Radio-Genomes</SelectItem>
+                            <SelectItem value="All Products">All Products</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="message">Additional Information</Label>
+                        <Label htmlFor="message">Message</Label>
                         <Textarea
                           id="message"
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
-                          className="bg-background min-h-[100px]"
-                          placeholder="Tell us about your specific needs and use cases..."
+                          className="min-h-[100px]"
                         />
                       </div>
 
-                      <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-smooth">
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="w-full bg-primary hover:bg-primary/90"
+                      >
                         Schedule Demo
                       </Button>
 
-                      <p className="text-xs text-muted-foreground text-center">
-                        By submitting this form, you agree to our Privacy Policy and Terms of Service
-                      </p>
                     </form>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Info Sidebar */}
+              {/* Sidebar */}
               <div className="space-y-6">
                 <Card className="gradient-card border-none shadow-lg">
                   <CardContent className="p-8 space-y-6">
-                    <div>
-                      <h3 className="font-heading text-2xl font-bold mb-4">What to Expect</h3>
-                      <ul className="space-y-3">
-                        {demoFeatures.map((feature, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                            <span className="text-muted-foreground">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <h3 className="text-2xl font-bold">What to Expect</h3>
+                    <ul className="space-y-3">
+                      {demoFeatures.map((f, i) => (
+                        <li key={i} className="flex gap-3">
+                          <CheckCircle className="h-5 w-5 text-primary" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </CardContent>
                 </Card>
 
                 <Card className="gradient-card border-none shadow-lg">
                   <CardContent className="p-8 space-y-4">
+
                     <div className="flex items-start gap-3">
                       <Calendar className="h-6 w-6 text-accent flex-shrink-0" />
                       <div>
@@ -253,22 +273,29 @@ const RequestDemo = () => {
                         </p>
                       </div>
                     </div>
+
                   </CardContent>
                 </Card>
 
-                <Card className="bg-accent/10 border-accent/20">
+
+                <Card>
                   <CardContent className="p-6">
-                    <p className="text-sm text-muted-foreground">
-                      <strong className="text-foreground">Need immediate assistance?</strong><br />
-                      Call us at <a href="tel:+911234567890" className="text-accent hover:underline">+91 123 456 7890</a> or 
-                      email <a href="mailto:contact@imaginginsightz.com" className="text-accent hover:underline">contact@imaginginsightz.com</a>
+                    <h3 className="font-bold">Need immediate assistance?</h3>
+                    <p className="text-sm">
+                      Call Us: <a href="tel:+919923030250" className="text-primary">+91 99230 30250</a>
+                      <br />
+                      Email Us: <a href="mailto:info@imaginginsightz.com" className="text-primary">
+                        info@imaginginsightz.com
+                      </a>
                     </p>
                   </CardContent>
                 </Card>
+
               </div>
             </div>
           </div>
         </div>
+
       </main>
 
       <Footer />

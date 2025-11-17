@@ -85,11 +85,11 @@ const Footer = () => {
                 <span>info@imaginginsightai.com</span>
               </a>
               <a
-                href="tel:+919999999999"
+                href="tel:+919923030250"
                 className="flex items-start space-x-2 text-sm text-muted-foreground hover:text-foreground transition-smooth"
               >
                 <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>+91 99999 99999</span>
+                <span>+91 99230 30250</span>
               </a>
               <div className="flex items-start space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -97,7 +97,7 @@ const Footer = () => {
               </div>
               <div className="flex space-x-3 pt-2">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/imaging-insight-ai/"
                   className="w-9 h-9 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-smooth"
                   aria-label="LinkedIn"
                 >

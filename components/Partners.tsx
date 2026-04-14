@@ -5,11 +5,11 @@ import { Building2, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
 const PARTNERS = [
   {
     name: 'Strand Life Sciences',
-    role: 'Sample Collection Partner',
-    desc: 'Pan-India sample collection network powering Radiogenomes AI nationwide. Trusted leader in clinical diagnostics, translational medicine, and bioinformatics.',
+    role: 'Strategic Partner',
+    desc: 'A strategic alliance with one of India\'s most trusted names in clinical diagnostics and translational medicine — powering Radiogenomes AI with nationwide reach and unmatched scientific expertise.',
     badge: 'PAN-INDIA',
     url: 'https://strandls.com',
-    tags: ['Sample Collection', 'Clinical Diagnostics', 'Pan-India Network'],
+    tags: ['Strategic Alliance', 'Clinical Diagnostics', 'Pan-India Network'],
   },
 ];
 
@@ -102,7 +102,7 @@ export function Partners() {
         >
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-slate-500 font-mono px-4 py-2 rounded-full border border-white/5">
             <ShieldCheck size={14} className="text-teal-400" />
-            <span>Trusted Pan-India Sample Collection Network</span>
+            <span>Trusted Pan-India Strategic Alliance</span>
           </div>
         </motion.div>
       </div>

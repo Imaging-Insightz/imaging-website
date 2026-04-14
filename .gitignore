@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*.local
+.DS_Store
+*.log
+
+# Private — never deploy
+_private_reports/
+Blue and White Modern Medical Healthcare Flyer.pdf
+Gemini_Generated_Image_*.png
+home.webp
